@@ -11,11 +11,11 @@
     </method>
   </configuration>
   <configuration default="false" name="Reposilite" type="Application" factoryName="Application">
-    <option name="ALTERNATIVE_JRE_PATH" value="8" />
+    <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/adopt-openj9-11.0.8" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.panda_lang.reposilite.ReposiliteLauncher" />
-    <module name="reposilite" />
-    <option name="VM_PARAMETERS" value="-Xmx12M -Dreposilite.debugEnabled=true" />
+    <module name="reposilite (1)" />
+    <option name="VM_PARAMETERS" value="-Xmx2048M -Dreposilite.debugEnabled=true" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/reposilite-backend/src/test/workspace" />
     <method v="2">
       <option name="Make" enabled="true" />

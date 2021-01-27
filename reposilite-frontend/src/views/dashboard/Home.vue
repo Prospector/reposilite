@@ -14,19 +14,15 @@
   - limitations under the License.
   -->
 
-<template lang="pug">
-  FileBrowser(
-    :qualifier='qualifier'
-    :auth="$parent.auth"
-    prefix="/dashboard"
-  )
+<template>
+  <FileBrowser :qualifier="qualifier" :auth="$parent.auth" prefix="/dashboard"></FileBrowser>
 </template>
 
 <script>
 import FileBrowser from '../../components/browser/FileBrowser'
 
 export default {
-  data () {
+  data() {
     return {
       qualifier: undefined
     }
@@ -37,7 +33,7 @@ export default {
   watch: {
     $route: {
       immediate: true,
-      handler () {
+      handler() {
         this.qualifier = this.getQualifier()
       }
     }

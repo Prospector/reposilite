@@ -14,12 +14,16 @@
   - limitations under the License.
   -->
 
-<template lang="pug">
-  .file-preview.w-full(v-if="this.qualifier !== undefined")
-    a(v-if="file.type === 'file'" v-on:click="handleDownload" target="_blank" ).cursor-pointer
-      FileEntryContent(:file="file")
-    router-link(v-else :to="fileUri()")
-      FileEntryContent(:file="file")
+<template>
+  <div class="file-preview w-full" v-if="this.qualifier !== undefined"><a class="cursor-pointer"
+                                                                          v-if="file.type === 'file'"
+                                                                          v-on:click="handleDownload" target="_blank">
+    <FileEntryContent :file="file" :last="last"></FileEntryContent>
+  </a>
+    <router-link v-else :to="fileUri()">
+      <FileEntryContent :file="file" :last="last"></FileEntryContent>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -31,7 +35,8 @@ export default {
   props: {
     prefix: String,
     auth: Object,
-    file: Object
+    file: Object,
+    last: Boolean
   },
   components: {
     FileEntryContent
@@ -48,7 +53,7 @@ export default {
     }
   },
   methods: {
-    handleDownload () {
+    handleDownload() {
       this.$http
         .get(this.fileUrl(), {
           responseType: 'blob',
@@ -66,12 +71,22 @@ export default {
         })
         .catch(err => console.log(err))
     },
-    fileUrl () {
+    fileUrl() {
       return this.baseUrl() + this.qualifier.substring(1) + this.file.name
     },
-    fileUri () {
+    fileUri() {
       return this.prefix + this.qualifier + this.file.name
     }
   }
 }
 </script>
+
+<style lang="stylus">
+.file-preview {
+  background-color #333333
+
+  :hover {
+    background-color #505050
+  }
+}
+</style>

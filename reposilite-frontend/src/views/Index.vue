@@ -14,29 +14,34 @@
   - limitations under the License.
   -->
 
-<template lang="pug">
-  #app
-    header
-      Wave(:accentColor="reposilite.accentColor").absolute.w-full
-      router-link(to="/").flex.text-white.h-56.flex-col.justify-center.px-8.container.mx-auto
-        .w-full
-          h1.text-5xl.segoe.text-grey.font-bold.pt-1 {{ reposilite.title }}
-        .w-full
-          p.text-lg.w-96.md_w-full {{ reposilite.description }}
-    main.mt-64.lg_mt-24
-      .container.mx-auto
-        .mx-4.pb-16
-           FileBrowser(
-             :qualifier='qualifier'
-             :auth="{}"
-             prefix=""
-           )
-    notifications(group="index" position="center top")
+<template>
+  <div id="app">
+    <header>
+      <div class="navbar">
+        <div class="content">
+          <router-link class="root" to="/">
+            <div class="logo">
+              <img src="https://raw.githubusercontent.com/Prospector/images/master/terraformersmc.svg"
+                   alt="TerraformersMC Logo">
+            </div>
+            <span class="title">{{ reposilite.title }}</span>
+          </router-link>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container mx-auto">
+        <div class="mx-4 pb-16">
+          <FileBrowser :qualifier="qualifier" :auth="{}" prefix=""></FileBrowser>
+        </div>
+      </div>
+    </main>
+    <notifications group="index" position="center top"></notifications>
+  </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import Wave from '../components/Wave'
 import FileBrowser from '../components/browser/FileBrowser'
 
 export default {
@@ -45,7 +50,6 @@ export default {
     qualifier: undefined
   }),
   components: {
-    Wave,
     FileBrowser
   },
   watch: {
@@ -61,18 +65,62 @@ export default {
 
 <style lang="stylus">
 html
-  background-color #f1f1f1
+  background-color #222222
+
 #app
   font-family 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  color #2c3e50
+  color #D5D5D5
   height 100%
   width 100%
+
 .blue
   background-color #0077dd
+
+.navbar {
+  width 100%
+  height 3rem
+  background-color #fff7e5
+  color: #221203
+  display: flex
+  justify-content: center
+  align-items: center
+
+  .content {
+    width 80%
+
+    .root {
+      display: flex
+      flex-direction row
+
+      .logo {
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 2rem;
+      }
+
+      .title {
+        font-size: 1.25rem
+        font-weight bold
+        margin-left: 0.5rem
+        line-height 1.8rem
+      }
+    }
+
+    @media screen and (max-width: 690px) {
+      width: 100%
+      .logo {
+        margin-left: 0.5rem
+      }
+    }
+  }
+}
+
 svg
   z-index -1
+
 .segoe
   font-family 'Segoe UI', 'Manrope'
 </style>

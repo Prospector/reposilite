@@ -39,7 +39,6 @@ export default {
     console.log('REPOSILITE_VUE_BASE_PATH: ' + this.reposilite.vueBasePath)
     console.log('REPOSILITE_TITLE: ' + this.reposilite.title)
     console.log('REPOSILITE_DESCRIPTION: ' + this.reposilite.description)
-    console.log('REPOSILITE_ACCENT_COLOR: ' + this.reposilite.accentColor)
   }
 }
 </script>

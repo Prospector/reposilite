@@ -41,7 +41,7 @@ Vue.prototype.$reposilite = {
     window.REPOSILITE_DESCRIPTION,
     'Reposilite description'
   ),
-  accentColor: orDefault(window.REPOSILITE_ACCENT_COLOR, '#000000')
+  accentColor: '#fff7e5'
 }
 
 Vue.use(Notifications)

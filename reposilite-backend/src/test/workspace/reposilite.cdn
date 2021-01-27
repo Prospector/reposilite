@@ -59,8 +59,6 @@ proxied [
 storeProxied: true
 
 # Title displayed by frontend
-title: #onlypanda
+title: TerraformersMC Maven
 # Description displayed by frontend
-description: Public Maven repository hosted through the Reposilite
-# Accent color used by frontend
-accentColor: #2fd4aa
+description: null

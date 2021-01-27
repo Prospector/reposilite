@@ -14,12 +14,15 @@
   - limitations under the License.
   -->
 
-<template lang="pug">
-  div.text-white.text-xs.bg-black
-    #console.pt-3.px-4.overflow-y-scroll.h-144
-      p(v-for="(message, index) in log" :key="index + '::' + message" v-html="message")
-    input#in(placeholder="Type command or '?' to get help" v-on:keyup.enter="execute").w-full.pb-3.pt-2.px-4.bg-black.text-white
-    notifications(group="cli" position="center top")
+<template>
+  <div class="text-white text-xs bg-black">
+    <div class="pt-3 px-4 overflow-y-scroll h-144" id="console">
+      <p v-for="(message, index) in log" :key="index + '::' + message" v-html="message"></p>
+    </div>
+    <input class="w-full pb-3 pt-2 px-4 bg-black text-white" id="in" placeholder="Type command or '?' to get help"
+           v-on:keyup.enter="execute">
+    <notifications group="cli" position="center top"></notifications>
+  </div>
 </template>
 
 <script>
@@ -27,13 +30,13 @@ import Vue from 'vue'
 import Convert from 'ansi-to-html'
 
 export default {
-  data () {
+  data() {
     return {
       connection: undefined,
       log: []
     }
   },
-  created () {
+  created() {
     let origin =
       process.env.NODE_ENV === 'production'
         ? window.location.origin + Vue.prototype.$reposilite.vueBasePath
@@ -90,21 +93,21 @@ export default {
       console.log(error)
     }
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => document.getElementById('in').focus())
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.connection.close()
   },
   methods: {
-    execute () {
+    execute() {
       const input = document.getElementById('in')
       const value = input.value
       input.value = ''
       this.connection.send(value)
       console.log(value)
     },
-    scrollToEnd () {
+    scrollToEnd() {
       const console = document.getElementById('console')
       console.scrollTop = console.scrollHeight
     }
@@ -114,7 +117,7 @@ export default {
 
 <style lang="stylus">
 #console
-    white-space pre-wrap
-    font-family 'Consolas', 'monospace'
-    font-size 12px
+  white-space pre-wrap
+  font-family 'Consolas', 'monospace'
+  font-size 12px
 </style>

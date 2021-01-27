@@ -14,31 +14,27 @@
   - limitations under the License.
   -->
 
-<template lang="pug">
-  .browser
-    .flex.justify-between.py-4
-      h1.text-xl
-        | Index of
-        span.ml-2
-          span(v-for="(element, idx) in splitQualifier()")
-            router-link(:to="pathFragmentUri(idx)") {{ element }}
-            span /
-        router-link(v-if="!isDashboard()" :to="'/dashboard' + this.qualifier")
-          span.ml-3(:style="'color: ' + configuration.accentColor")
-            i.fas.fa-feather-alt
-      router-link(v-if="!isRoot()" :to='prefix + parentPath()') ← Back
-    .list.overflow-y-auto
-      FileEntry(
-        v-if="!error"
-        v-for="file in files"
-        :key="file.name"
-        :prefix="prefix"
-        :file="file"
-        :auth="auth"
-      )
-      h1(v-if="!error && files.length == 0") Empty directory
-      h1(v-if="error").font-bold {{ response.message }}
-    notifications(group="index" position="center top")
+<template>
+  <div class="browser">
+    <div class="flex justify-between py-4">
+      <h1 class="text-xl">Index of<span class="ml-2"><span v-for="(element, idx) in splitQualifier()">
+            <router-link :to="pathFragmentUri(idx)">{{ element }}</router-link><span>/</span></span></span>
+        <router-link v-if="!isDashboard()" :to="'/dashboard' + this.qualifier"><span class="ml-3"
+                                                                                     :style="'color: ' + configuration.accentColor"><i
+          class="fas fa-sign-in-alt"></i></span></router-link>
+      </h1>
+      <router-link v-if="!isRoot()" :to="prefix + parentPath()" class="back-button"><i class="fas fa-chevron-left"></i>
+        Back
+      </router-link>
+    </div>
+    <div class="list overflow-y-auto">
+      <FileEntry v-if="!error" v-for="(file, index) in files" :key="file.name" :prefix="prefix" :file="file"
+                 :auth="auth" :last="index === files.length - 1"></FileEntry>
+      <h1 v-if="!error && files.length === 0">Empty directory</h1>
+      <h1 class="font-bold" v-if="error">{{ response.message }}</h1>
+    </div>
+    <notifications group="index" position="center top"></notifications>
+  </div>
 </template>
 
 <script>
@@ -55,7 +51,7 @@ export default {
     prefix: String,
     auth: Object
   },
-  data () {
+  data() {
     return {
       configuration: Vue.prototype.$reposilite,
       files: [],
@@ -86,14 +82,14 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.$smoothReflow({
       transition: '.25s'
     })
   },
   methods: {
     // replace with virtual scroller in the future
-    loadFiles (taskId, files) {
+    loadFiles(taskId, files) {
       if (this.taskId !== taskId) {
         return
       }
@@ -111,15 +107,15 @@ export default {
         }
       }
     },
-    pathFragmentUri (index) {
+    pathFragmentUri(index) {
       return this.splitQualifier()
         .slice(0, index + 1)
         .join('/')
     },
-    isDashboard () {
+    isDashboard() {
       return this.prefix === '/dashboard'
     },
-    isRoot () {
+    isRoot() {
       return this.qualifier === undefined || this.qualifier.length < 2
     }
   }
@@ -128,5 +124,16 @@ export default {
 
 <style lang="stylus">
 .list
-  max-height: 70vh
+  max-height 70vh
+  border-radius 0.25rem
+
+.back-button {
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.25rem;
+
+  :hover {
+    background-color: #333333
+    color: white;
+  }
+}
 </style>

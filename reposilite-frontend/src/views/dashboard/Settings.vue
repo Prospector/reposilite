@@ -14,6 +14,6 @@
   - limitations under the License.
   -->
 
-<template lang="pug">
-  div #soon™
+<template>
+  <div>#soon™</div>
 </template>

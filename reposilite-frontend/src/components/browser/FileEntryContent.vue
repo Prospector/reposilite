@@ -14,15 +14,17 @@
   - limitations under the License.
   -->
 
-<template lang="pug">
-  .flex.py-2.px-6.border-1.border-gray-300
-    .pr-5
-      i(v-if="file.type === 'directory'").fas.fa-folder
-      i(v-if="file.type === 'file'").fas.fa-file
-    .flex.justify-between.w-full
-      h1(v-if="file.type === 'file'") {{ file.name }}
-      h1(v-else).font-bold {{ file.name }}
-      p(v-if="file.type === 'file'") {{ fileSize }}
+<template>
+  <div :class="{ 'divider-bottom': !last }" class="flex py-2 px-6">
+    <div class="pr-5"><i class="fas fa-folder" v-if="file.type === 'directory'"></i><i class="fas fa-file"
+                                                                                       v-if="file.type === 'file'"></i>
+    </div>
+    <div class="flex justify-between w-full">
+      <h1 v-if="file.type === 'file'">{{ file.name }}</h1>
+      <h1 class="font-bold" v-else>{{ file.name }}</h1>
+      <p v-if="file.type === 'file'">{{ fileSize }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -30,12 +32,19 @@ import prettyBytes from 'pretty-bytes'
 
 export default {
   props: {
-    file: Object
+    file: Object,
+    last: Boolean
   },
-  data () {
+  data() {
     return {
       fileSize: prettyBytes(this.file.contentLength)
     }
   }
 }
 </script>
+
+<style lang="stylus">
+.divider-bottom {
+  border-bottom: 2px solid #222222
+}
+</style>

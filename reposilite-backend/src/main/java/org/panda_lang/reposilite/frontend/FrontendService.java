@@ -47,8 +47,7 @@ public final class FrontendService {
                 .register("{{REPOSILITE.BASE_PATH}}", configuration.basePath)
                 .register("{{REPOSILITE.VUE_BASE_PATH}}", configuration.basePath.equals("/") ? "" : configuration.basePath)
                 .register("{{REPOSILITE.TITLE}}", configuration.title)
-                .register("{{REPOSILITE.DESCRIPTION}}", configuration.description)
-                .register("{{REPOSILITE.ACCENT_COLOR}}", configuration.accentColor);
+                .register("{{REPOSILITE.DESCRIPTION}}", configuration.description);
 
         return new FrontendService(
                 () -> formatter.format(FilesUtils.getResource("/static/index.html")),

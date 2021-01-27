@@ -19,7 +19,6 @@ import Router from 'vue-router'
 import Index from './views/Index.vue'
 import Dashboard from './views/Dashboard.vue'
 import DashboardHome from './views/dashboard/Home.vue'
-import DashboardUpload from './views/dashboard/Upload.vue'
 import DashboardCli from './views/dashboard/Cli.vue'
 import DashboardSettings from './views/dashboard/Settings.vue'
 
@@ -37,11 +36,6 @@ export default new Router({
       component: Dashboard,
 
       children: [
-        {
-          path: 'upload',
-          name: 'Dashboard Upload',
-          component: DashboardUpload
-        },
         {
           path: 'settings',
           name: 'Dashboard Settings',

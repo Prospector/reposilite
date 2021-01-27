@@ -90,7 +90,4 @@ public final class Configuration implements Serializable {
     public String title = "#onlypanda";
     @Description("# Description displayed by frontend")
     public String description = "Public Maven repository hosted through the Reposilite";
-    @Description("# Accent color used by frontend")
-    public String accentColor = "#2fd4aa";
-
 }
