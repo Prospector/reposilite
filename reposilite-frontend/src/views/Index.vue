@@ -17,14 +17,14 @@
 <template>
   <div id="app">
     <header>
-      <div class="navbar">
+      <div class="navbar" :class="getStyleClass()">
         <div class="content">
           <router-link class="root" to="/">
             <div class="logo">
-              <img src="https://raw.githubusercontent.com/Prospector/images/master/terraformersmc.svg"
-                   alt="TerraformersMC Logo">
+              <img :src="getLogoUrl()"
+                   :alt="getHostName() + ' Logo'">
             </div>
-            <span class="title">{{ reposilite.title }}</span>
+            <span class="title">{{ getHostName() }} Maven</span>
           </router-link>
         </div>
       </div>
@@ -59,6 +59,29 @@ export default {
         this.qualifier = this.getQualifier()
       }
     }
+  },
+  methods: {
+    getStyleClass () {
+      let style = 'terraformersmc'
+      if (window.location.hostname.endsWith('patchworkmc.net')) {
+        style = 'patchworkmc'
+      }
+      return style
+    },
+    getHostName () {
+      const style = this.getStyleClass()
+      if (style === 'patchworkmc') {
+        return 'PatchworkMC'
+      }
+      return 'TerraformersMC'
+    },
+    getLogoUrl () {
+      const style = this.getStyleClass()
+      if (style === 'patchworkmc') {
+        return 'https://raw.githubusercontent.com/Prospector/images/master/patchworkmc.svg'
+      }
+      return 'https://raw.githubusercontent.com/Prospector/images/master/terraformersmc.svg'
+    }
   }
 }
 </script>
@@ -78,11 +101,19 @@ html
 .blue
   background-color #0077dd
 
+.patchworkmc {
+  background-image linear-gradient(49deg, rgba(247, 75, 19, 1) 22%, rgba(248, 157, 27, 1) 59%)
+  color: #ffffff
+}
+
+.terraformersmc {
+  background-color #fff7e5
+  color: #221203
+}
+
 .navbar {
   width 100%
   height 3rem
-  background-color #fff7e5
-  color: #221203
   display: flex
   justify-content: center
   align-items: center

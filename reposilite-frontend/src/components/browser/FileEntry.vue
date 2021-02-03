@@ -17,7 +17,7 @@
 <template>
   <div class="file-preview w-full" v-if="this.qualifier !== undefined"><a class="cursor-pointer"
                                                                           v-if="file.type === 'file'"
-                                                                          v-on:click="handleDownload" target="_blank">
+                                                                          :href="fileUri()" target="_blank">
     <FileEntryContent :file="file" :last="last"></FileEntryContent>
   </a>
     <router-link v-else :to="fileUri()">

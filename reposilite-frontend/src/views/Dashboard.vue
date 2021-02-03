@@ -146,7 +146,6 @@ header {
   }
   .tab {
     padding: 0.4rem 1rem;
-    background-color: transparent;
     margin-right: 0.25rem;
     border-radius: 0.25rem;
   }
